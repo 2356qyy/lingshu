@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>灵枢微观 | 中医数字化可视化教育引领者</title>
+  <!-- 核心CDN依赖 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- 自定义Tailwind配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0D9488', // 中医国风青 主色
+            secondary: '#165DFF', // 科技蓝 辅助色
+            accent: '#B91C1C', // 国风红 强调色
+            light: '#F8FAFC',
+            dark: '#1E293B'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      }
+      .bg-gradient-gf {
+        background: linear-gradient(135deg, #0D9488 0%, #165DFF 100%);
+      }
+      .card-hover {
+        @apply transition-all duration-300 hover:scale-105 hover:shadow-xl hover:-translate-y-1;
+      }
+      .section-padding {
+        @apply py-20 md:py-24;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-dark overflow-x-hidden">
+  <!-- 导航栏 - 滚动互动效果 -->
+  <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-transparent">
+    <div class="container mx-auto px-4 md:px-6">
+      <nav class="flex items-center justify-between h-20">
+        <a href="#" class="flex items-center gap-2">
+          <span class="text-3xl text-primary"><i class="fa-solid fa-heart-pulse"></i></span>
+          <span class="text-xl md:text-2xl font-bold text-white text-shadow">灵枢微观</span>
+        </a>
+
+        <!-- 桌面端导航 -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#about" class="text-white hover:text-primary/80 font-medium transition-all">关于我们</a>
+          <a href="#research" class="text-white hover:text-primary/80 font-medium transition-all">研究方向</a>
+          <a href="#download" class="text-white hover:text-primary/80 font-medium transition-all">产品下载</a>
+          <a href="#ip" class="text-white hover:text-primary/80 font-medium transition-all">IP品牌</a>
+          <a href="#team" class="text-white hover:text-primary/80 font-medium transition-all">团队介绍</a>
+          <a href="#contact" class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition-all">联系我们</a>
+        </div>
+
+        <!-- 移动端汉堡菜单 -->
+        <button id="menuBtn" class="md:hidden text-white text-2xl">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </nav>
+    </div>
+
+    <!-- 移动端导航菜单 -->
+    <div id="mobileMenu" class="md:hidden h-0 overflow-hidden transition-all duration-300 bg-white shadow-lg">
+      <div class="container mx-auto px-4 py-4 flex flex-col gap-4">
+        <a href="#about" class="py-2 text-dark hover:text-primary font-medium">关于我们</a>
+        <a href="#research" class="py-2 text-dark hover:text-primary font-medium">研究方向</a>
+        <a href="#download" class="py-2 text-dark hover:text-primary font-medium">产品下载</a>
+        <a href="#ip" class="py-2 text-dark hover:text-primary font-medium">IP品牌</a>
+        <a href="#team" class="py-2 text-dark hover:text-primary font-medium">团队介绍</a>
+        <a href="#contact" class="bg-primary text-white px-6 py-2 rounded-full font-semibold text-center">联系我们</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero英雄区 - 视差互动效果 -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 bg-black/50 z-10"></div>
+    <!-- 背景图 -->
+    <div class="absolute inset-0 bg-cover bg-center z-0" style="background-image: url('https://picsum.photos/id/1050/1920/1080'); background-attachment: fixed;"></div>
+    <div class="container mx-auto px-4 md:px-6 z-20 text-center">
+      <div data-aos="fade-up" data-aos-duration="1000">
+        <h1 class="text-[clamp(2.5rem,8vw,5rem)] font-bold text-white text-shadow mb-6">
+          灵枢微观
+        </h1>
+        <p class="text-[clamp(1rem,3vw,1.5rem)] text-white text-shadow mb-8 max-w-3xl mx-auto">
+          基于数字孪生的中医证型三维可视化学习平台 | 构建可交互、可探索、可学习的微观中医元宇宙
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#download" class="bg-gradient-gf text-white px-8 py-4 rounded-full text-lg font-semibold card-hover">
+            <i class="fa-solid fa-download mr-2"></i>立即下载APP
+          </a>
+          <a href="#about" class="bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-full text-lg font-semibold transition-all hover:bg-white/30">
+            了解更多
+          </a>
+        </div>
+      </div>
+      
+      <!-- 滚动指示器 -->
+      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-white animate-bounce" data-aos="fade-up" data-aos-delay="800">
+        <i class="fa-solid fa-chevron-down text-2xl"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于我们/理念展示 -->
+  <section id="about" class="section-padding bg-white">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold text-dark mb-4">关于灵枢微观</h2>
+        <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div data-aos="fade-right" data-aos-duration="800">
+          <h3 class="text-2xl md:text-3xl font-bold text-primary mb-6">我们的理念</h3>
+          <p class="text-lg text-slate-700 mb-4 leading-relaxed">
+            灵枢微观是面向中医爱好者与中医药院校低年级学生，以三维可视化与智能硬件为核心的轻量化中医教学辅助工具，致力于生动呈现中医生命科学原理，让抽象的中医理论变得直观可感。
+          </p>
+          <p class="text-lg text-slate-700 mb-6 leading-relaxed">
+            我们打造了中医核心证型辨证学习、游戏化交互与简易训练硬件于一体的大众化中医学习生态，形成「软件+硬件+文化」的全链条解决方案，立志成为中医数字化教育与文化传播的引领者。
+          </p>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-slate-50 p-4 rounded-lg card-hover">
+              <h4 class="text-xl font-bold text-secondary mb-2">核心创新</h4>
+              <p class="text-slate-600">数字生命沙盘技术，AI辅诊系统与Unity三维引擎深度耦合</p>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-lg card-hover">
+              <h4 class="text-xl font-bold text-secondary mb-2">全链闭环</h4>
+              <p class="text-slate-600">理论学习、虚拟模拟、硬件实操的完整中医教学闭环</p>
+            </div>
+          </div>
+        </div>
+
+        <div data-aos="fade-left" data-aos-duration="800" class="relative">
+          <div class="absolute -top-4 -left-4 w-full h-full border-2 border-primary rounded-2xl"></div>
+          <img src="https://picsum.photos/id/237/800/600" alt="灵枢微观平台演示" class="w-full h-auto rounded-2xl shadow-xl relative z-10">
+        </div>
+      </div>
+
+      <!-- 核心数据看板 - 数字计数动画 -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20" data-aos="fade-up">
+        <div class="bg-gradient-gf text-white p-6 rounded-xl text-center card-hover">
+          <h3 class="text-4xl md:text-5xl font-bold mb-2"><span class="count-num" data-target="860">0</span>亿</h3>
+          <p class="text-white/80 font-medium">中医教育数字化赛道规模</p>
+        </div>
+        <div class="bg-white border border-slate-200 p-6 rounded-xl text-center shadow-md card-hover">
+          <h3 class="text-4xl md:text-5xl font-bold text-secondary mb-2"><span class="count-num" data-target="3">0</span>项</h3>
+          <p class="text-slate-600 font-medium">软件著作权</p>
+        </div>
+        <div class="bg-white border border-slate-200 p-6 rounded-xl text-center shadow-md card-hover">
+          <h3 class="text-4xl md:text-5xl font-bold text-secondary mb-2"><span class="count-num" data-target="1">0</span>项</h3>
+          <p class="text-slate-600 font-medium">实用新型专利</p>
+        </div>
+        <div class="bg-white border border-slate-200 p-6 rounded-xl text-center shadow-md card-hover">
+          <h3 class="text-4xl md:text-5xl font-bold text-secondary mb-2"><span class="count-num" data-target="16.2">0</span>%</h3>
+          <p class="text-slate-600 font-medium">赛道年复合增长率</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 核心研究方向/产品矩阵 -->
+  <section id="research" class="section-padding bg-slate-50">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold text-dark mb-4">核心研究方向</h2>
+        <p class="text-lg text-slate-600 max-w-3xl mx-auto">以「数字孪生+中医教育」为核心，构建软件、硬件、文化三位一体的创新产品矩阵</p>
+        <div class="w-20 h-1 bg-primary mx-auto rounded-full mt-4"></div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- 方向1：软件平台 -->
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="100">
+          <div class="h-48 bg-gradient-gf flex items-center justify-center">
+            <i class="fa-solid fa-laptop-code text-white text-5xl"></i>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-dark mb-4">中医证型三维可视化软件</h3>
+            <ul class="space-y-3 text-slate-700">
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-check-circle text-primary mt-1"></i>
+                <span>数字生命沙盘技术，实现证型病机动态可视化</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-check-circle text-primary mt-1"></i>
+                <span>六大人体三维模型，覆盖肌肉、经络、循环等系统</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-check-circle text-primary mt-1"></i>
+                <span>游戏化交互，完成从症状到身体变化的认知闭环</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-check-circle text-primary mt-1"></i>
+                <span>微信小程序+APP双端，预留VR硬件数据接口</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 方向2：智能硬件 -->
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="200">
+          <div class="h-48 bg-secondary flex items-center justify-center">
+            <i class="fa-solid fa-microchip text-white text-5xl"></i>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-dark mb-4">针灸模拟器智能硬件</h3>
+            <ul class="space-y-3 text-slate-700">
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-check-circle text-primary mt-1"></i>
+                <span>2025年省级大创立项，高精度传感与力反馈技术</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-check-circle text-primary mt-1"></i>
+                <span>预埋穴位与真实手感模拟，精准检测针刺稳定度</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-check-circle text-primary mt-1"></i>
+                <span>与小程序联动，实现理论-虚拟-实操全教学闭环</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-check-circle text-primary mt-1"></i>
+                <span>适配院校教学与个人实训双场景，轻量化易部署</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 方向3：文化IP与传播 -->
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="300">
+          <div class="h-48 bg-accent flex items-center justify-center">
+            <i class="fa-solid fa-palette text-white text-5xl"></i>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-dark mb-4">中医IP文创与文化传播</h3>
+            <ul class="space-y-3 text-slate-700">
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-check-circle text-primary mt-1"></i>
+                <span>虚拟IP「小枢」全链路运营，贴合Z世代审美</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-check-circle text-primary mt-1"></i>
+                <span>潮玩盲盒、文创产品全品类开发，IP授权变现</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-check-circle text-primary mt-1"></i>
+                <span>全平台新媒体矩阵运营，常态化直播内容生产</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-check-circle text-primary mt-1"></i>
+                <span>社区健康驿站、体验馆线下场景全渠道覆盖</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APK下载专区 -->
+  <section id="download" class="section-padding bg-dark text-white">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div data-aos="fade-right">
+          <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-6">灵枢微观APP</h2>
+          <p class="text-lg text-white/80 mb-8 leading-relaxed max-w-xl">
+            移动端APP现已开放下载，随时随地体验中医证型三维可视化学习，内置完整的辨证学习模块、体质辨识功能、经络穴位查询等核心能力，搭配游戏化交互体验，让中医学习更轻松、更直观。
+          </p>
+          
+          <div class="space-y-4 mb-8">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                <i class="fa-solid fa-shield-halved text-white"></i>
+              </div>
+              <span class="text-white/90">官方正版安装包，安全无广告</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                <i class="fa-solid fa-sync text-white"></i>
+              </div>
+              <span class="text-white/90">持续版本更新，功能不断优化</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                <i class="fa-solid fa-mobile-screen-button text-white"></i>
+              </div>
+              <span class="text-white/90">适配安卓全机型，占用内存小</span>
+            </div>
+          </div>
+
+          <!-- 下载按钮 -->
+          <a href="./灵枢微观.apk" id="downloadBtn" class="inline-block bg-white text-dark px-10 py-4 rounded-full text-xl font-bold card-hover">
+            <i class="fa-brands fa-android mr-2 text-accent"></i>
+            立即下载 APK
+          </a>
+          <p class="mt-4 text-white/60 text-sm">* 微信内点击右上角「在浏览器中打开」即可下载</p>
+        </div>
+
+        <!-- 手机mockup -->
+        <div class="relative" data-aos="fade-left">
+          <div class="absolute inset-0 bg-gradient-gf blur-3xl opacity-30 rounded-full"></div>
+          <img src="https://picsum.photos/id/1/600/1200" alt="灵枢微观APP界面" class="relative z-10 w-full max-w-sm mx-auto rounded-3xl border-8 border-slate-800 shadow-2xl">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IP品牌展示区 -->
+  <section id="ip" class="section-padding bg-white">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold text-dark mb-4">虚拟IP「小枢」</h2>
+        <p class="text-lg text-slate-600 max-w-3xl mx-auto">萌系中医推广大使，以年轻人喜爱的方式传播中医文化</p>
+        <div class="w-20 h-1 bg-primary mx-auto rounded-full mt-4"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+        <div class="relative" data-aos="fade-right">
+          <div class="absolute -bottom-4 -right-4 w-full h-full border-2 border-primary rounded-2xl"></div>
+          <img src="https://picsum.photos/id/3/800/800" alt="小枢IP形象" class="w-full h-auto rounded-2xl shadow-xl relative z-10">
+        </div>
+
+        <div data-aos="fade-left">
+          <h3 class="text-2xl md:text-3xl font-bold text-primary mb-6">IP人设定位</h3>
+          <div class="bg-slate-50 p-6 rounded-xl mb-6">
+            <p class="text-lg mb-4"><span class="font-bold">名称：</span>小枢</p>
+            <p class="text-lg mb-4"><span class="font-bold">身份：</span>「灵枢微观」虚拟中医形象，千年药童转世，精通经络穴位的萌系中医推广大使</p>
+            <p class="text-lg mb-4"><span class="font-bold">性格：</span>温柔治愈、专业靠谱、偶尔调皮、热爱探索，完美贴合Z世代审美与情感需求</p>
+            <p class="text-lg mb-4"><span class="font-bold">视觉风格：</span>Q版国风+科技感融合，头戴经络光圈，手持针灸模型，身穿现代改良汉服，腰间悬挂中药香囊</p>
+            <p class="text-lg"><span class="font-bold">口头禅：</span>「让我帮你通通经络吧~」「气血不足？小枢来帮你！」</p>
+          </div>
+          <button id="ipDetailBtn" class="bg-primary text-white px-8 py-3 rounded-full font-semibold card-hover">
+            查看IP完整运营方案
+          </button>
+        </div>
+      </div>
+
+      <!-- IP四大变现路径 -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6" data-aos="fade-up">
+        <div class="bg-slate-50 p-6 rounded-xl text-center card-hover">
+          <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fa-solid fa-copyright text-white text-xl"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-2">IP授权</h4>
+          <p class="text-slate-600">潮玩、文创、国潮服饰品牌授权，固定授权费+销售分成</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-xl text-center card-hover">
+          <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fa-solid fa-handshake text-white text-xl"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-2">IP联名</h4>
+          <p class="text-slate-600">与茶饮、美妆、文具等品牌联名，推出限定款产品，销售额分成</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-xl text-center card-hover">
+          <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fa-solid fa-video text-white text-xl"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-2">内容付费</h4>
+          <p class="text-slate-600">开发「小枢的奇妙中医之旅」付费动画课程，全平台上线</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-xl text-center card-hover">
+          <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fa-solid fa-box-open text-white text-xl"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-2">周边众筹</h4>
+          <p class="text-slate-600">盲盒、手办周边众筹，提前锁定用户，测试市场热度</p>
+        </div>
+      </div>
+
+      <!-- 宣传矩阵展示 -->
+      <div class="mt-24">
+        <div class="text-center mb-12" data-aos="fade-up">
+          <h3 class="text-2xl md:text-3xl font-bold text-dark mb-4">全渠道宣传运营矩阵</h3>
+          <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- 线上矩阵 -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-md" data-aos="fade-right">
+            <h4 class="text-2xl font-bold text-secondary mb-6 flex items-center">
+              <i class="fa-solid fa-globe mr-3 text-primary"></i>线上新媒体矩阵
+            </h4>
+            <div class="grid grid-cols-3 gap-4">
+              <div class="text-center card-hover p-4">
+                <div class="w-14 h-14 bg-[#250000] rounded-full flex items-center justify-center mx-auto mb-2">
+                  <i class="fa-brands fa-douban text-white text-2xl"></i>
+                </div>
+                <p class="font-medium">小红书</p>
+              </div>
+              <div class="text-center card-hover p-4">
+                <div class="w-14 h-14 bg-[#000000] rounded-full flex items-center justify-center mx-auto mb-2">
+                  <i class="fa-brands fa-tiktok text-white text-2xl"></i>
+                </div>
+                <p class="font-medium">抖音</p>
+              </div>
+              <div class="text-center card-hover p-4">
+                <div class="w-14 h-14 bg-[#07C160] rounded-full flex items-center justify-center mx-auto mb-2">
+                  <i class="fa-brands fa-weixin text-white text-2xl"></i>
+                </div>
+                <p class="font-medium">微信公众号</p>
+              </div>
+              <div class="text-center card-hover p-4">
+                <div class="w-14 h-14 bg-[#512DA8] rounded-full flex items-center justify-center mx-auto mb-2">
+                  <i class="fa-solid fa-video text-white text-2xl"></i>
+                </div>
+                <p class="font-medium">哔哩哔哩</p>
+              </div>
+              <div class="text-center card-hover p-4">
+                <div class="w-14 h-14 bg-[#EB4D3D] rounded-full flex items-center justify-center mx-auto mb-2">
+                  <i class="fa-solid fa-shop text-white text-2xl"></i>
+                </div>
+                <p class="font-medium">文创电商店铺</p>
+              </div>
+              <div class="text-center card-hover p-4">
+                <div class="w-14 h-14 bg-[#165DFF] rounded-full flex items-center justify-center mx-auto mb-2">
+                  <i class="fa-solid fa-users text-white text-2xl"></i>
+                </div>
+                <p class="font-medium">私域社群</p>
+              </div>
+            </div>
+            <p class="mt-6 text-slate-600">自有工作室配备专业直播设备，具备常态化内容生产与直播运营能力，全平台账号已完成注册与内容推流，实现内容引流-用户沉淀-产品转化的全链路运营。</p>
+          </div>
+
+          <!-- 线下矩阵 -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-md" data-aos="fade-left">
+            <h4 class="text-2xl font-bold text-secondary mb-6 flex items-center">
+              <i class="fa-solid fa-building mr-3 text-primary"></i>线下场景宣传矩阵
+            </h4>
+            <div class="space-y-4">
+              <div class="flex items-start gap-4 p-4 bg-slate-50 rounded-lg card-hover">
+                <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center shrink-0 mt-1">
+                  <i class="fa-solid fa-house-medical text-white"></i>
+                </div>
+                <div>
+                  <h5 class="font-bold text-lg mb-1">社区健康驿站</h5>
+                  <p class="text-slate-600">配备小程序体验设备与文创展示区，居民可自助体验3D经络演示、体质测试，定期开展专家健康讲座、义诊活动，实现线下引流线上承接。</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4 p-4 bg-slate-50 rounded-lg card-hover">
+                <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center shrink-0 mt-1">
+                  <i class="fa-solid fa-landmark text-white"></i>
+                </div>
+                <div>
+                  <h5 class="font-bold text-lg mb-1">中医药文化体验馆</h5>
+                  <p class="text-slate-600">设置文化展示区、互动体验区、产品服务区，涵盖AR经络沙盘、VR针灸模拟、3D证型演示等互动环节，沉浸式传播中医文化，同步推广产品与IP。</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4 p-4 bg-slate-50 rounded-lg card-hover">
+                <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center shrink-0 mt-1">
+                  <i class="fa-solid fa-graduation-cap text-white"></i>
+                </div>
+                <div>
+                  <h5 class="font-bold text-lg mb-1">高校与儿童科普活动</h5>
+                  <p class="text-slate-600">联动中医药院校开展教学合作，针对儿童群体策划趣味中医科普活动，通过互动游戏、动手实践培养中医文化传承意识，实现全年龄段用户覆盖。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 团队介绍 -->
+  <section id="team" class="section-padding bg-slate-50">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold text-dark mb-4">团队介绍</h2>
+        <p class="text-lg text-slate-600 max-w-3xl mx-auto">灵枢云创工作室，深耕中医数字化领域，产学研深度融合，技术与专业双轮驱动</p>
+        <div class="w-20 h-1 bg-primary mx-auto rounded-full mt-4"></div>
+      </div>
+
+      <!-- 团队核心优势 -->
+      <div class="grid md:grid-cols-3 gap-8 mb-20">
+        <div class="bg-white rounded-xl p-6 shadow-md card-hover" data-aos="fade-up" data-aos-delay="100">
+          <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mb-4">
+            <i class="fa-solid fa-microchip text-white text-xl"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-3">硬核技术实力</h4>
+          <p class="text-slate-600">掌握三项软件著作权、一项实用新型专利，核心数字生命沙盘技术实现行业突破，与高校、科技企业深度合作，具备全链路产品研发能力。</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-md card-hover" data-aos="fade-up" data-aos-delay="200">
+          <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mb-4">
+            <i class="fa-solid fa-user-doctor text-white text-xl"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-3">专业医学背书</h4>
+          <p class="text-slate-600">与辽宁中医药大学建立深度合作，依托院校专业师资与科研实力，确保产品内容的专业性、权威性，符合中医诊疗核心逻辑与教学规范。</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-md card-hover" data-aos="fade-up" data-aos-delay="300">
+          <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mb-4">
+            <i class="fa-solid fa-handshake text-white text-xl"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-3">成熟商业合作</h4>
+          <p class="text-slate-600">与悬剑科技（沈阳）有限公司签署商业合作合同，获得钓鱼台医药集团吉林天强制药股份有限公司专业指导，形成产学研用一体化的商业闭环。</p>
+        </div>
+      </div>
+
+      <!-- 合作企业 -->
+      <div class="mt-20">
+        <div class="text-center mb-12" data-aos="fade-up">
+          <h3 class="text-2xl md:text-3xl font-bold text-dark mb-4">战略合作伙伴</h3>
+          <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8" data-aos="fade-up">
+          <div class="bg-white rounded-xl p-6 text-center shadow-md card-hover flex items-center justify-center h-32">
+            <p class="text-xl font-bold text-slate-700">辽宁中医药大学</p>
+          </div>
+          <div class="bg-white rounded-xl p-6 text-center shadow-md card-hover flex items-center justify-center h-32">
+            <p class="text-xl font-bold text-slate-700">悬剑科技（沈阳）有限公司</p>
+          </div>
+          <div class="bg-white rounded-xl p-6 text-center shadow-md card-hover flex items-center justify-center h-32">
+            <p class="text-xl font-bold text-slate-700">钓鱼台医药集团</p>
+          </div>
+          <div class="bg-white rounded-xl p-6 text-center shadow-md card-hover flex items-center justify-center h-32">
+            <p class="text-xl font-bold text-slate-700">吉林天强制药</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚/联系我们 -->
+  <footer id="contact" class="bg-dark text-white pt-20 pb-10">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="grid md:grid-cols-4 gap-12 mb-16">
+        <div class="md:col-span-1">
+          <a href="#" class="flex items-center gap-2 mb-6">
+            <span class="text-3xl text-primary"><i class="fa-solid fa-heart-pulse"></i></span>
+            <span class="text-2xl font-bold text-white">灵枢微观</span>
+          </a>
+          <p class="text-white/70 mb-6">中医数字化教育与文化传播的引领者，构建可交互、可探索、可学习的微观中医元宇宙。</p>
+          <div class="flex gap-4">
+            <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-all">
+              <i class="fa-brands fa-weixin text-white"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-all">
+              <i class="fa-brands fa-tiktok text-white"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-all">
+              <i class="fa-brands fa-github text-white"></i>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-bold mb-6">快速导航</h4>
+          <ul class="space-y-3">
+            <li><a href="#about" class="text-white/70 hover:text-primary transition-all">关于我们</a></li>
+            <li><a href="#research" class="text-white/70 hover:text-primary transition-all">研究方向</a></li>
+            <li><a href="#download" class="text-white/70 hover:text-primary transition-all">产品下载</a></li>
+            <li><a href="#ip" class="text-white/70 hover:text-primary transition-all">IP品牌</a></li>
+            <li><a href="#team" class="text-white/70 hover:text-primary transition-all">团队介绍</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-bold mb-6">联系我们</h4>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-envelope text-primary mt-1"></i>
+              <span class="text-white/70">contact@lingshuweiguan.com</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-phone text-primary mt-1"></i>
+              <span class="text-white/70">13xxxxxxxxx</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-location-dot text-primary mt-1"></i>
+              <span class="text-white/70">辽宁省沈阳市 灵枢云创工作室</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-bold mb-6">产品下载</h4>
+          <a href="#download" class="bg-primary text-white px-6 py-3 rounded-full font-semibold inline-block mb-4 card-hover">
+            <i class="fa-solid fa-download mr-2"></i>APK下载
+          </a>
+          <p class="text-white/70">微信小程序即将上线，敬请期待</p>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-8 text-center">
+        <p class="text-white/50">© 2025 灵枢微观 灵枢云创工作室 版权所有 | 本项目已获得多项软件著作权与专利保护</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- IP详情模态框 -->
+  <div id="ipModal" class="fixed inset-0 bg-black/70 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
+    <div class="bg-white rounded-2xl max-w-3xl w-full mx-4 max-h-[90vh] overflow-y-auto" data-aos="zoom-in">
+      <div class="p-6 md:p-8">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-2xl font-bold text-dark">「小枢」IP完整运营方案</h3>
+          <button id="closeModal" class="text-2xl text-slate-500 hover:text-dark">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="space-y-6">
+          <div>
+            <h4 class="text-xl font-bold text-primary mb-3">一、IP内容矩阵</h4>
+            <ul class="space-y-2 text-slate-700 list-disc pl-5">
+              <li>短视频内容：中医趣味科普、经络穴位小知识、节气养生指南，全平台分发</li>
+              <li>条漫内容：「小枢的中医日常」系列条漫，打造轻松有趣的中医知识内容</li>
+              <li>直播内容：中医专家连麦、养生知识科普、文创产品直播、学习经验分享</li>
+              <li>课程内容：体系化中医入门动画课程，打造付费内容产品</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-xl font-bold text-primary mb-3">二、IP与主产品协同</h4>
+            <ul class="space-y-2 text-slate-700 list-disc pl-5">
+              <li><strong>引流：</strong>IP内容在社交平台传播，吸引粉丝关注，通过内置二维码引流至核心产品</li>
+              <li><strong>留存：</strong>IP形象作为小程序引导NPC，增强用户情感连接与使用粘性</li>
+              <li><strong>转化：</strong>IP衍生品作为会员积分兑换礼品、付费用户专属福利，提升转化效率</li>
+              <li><strong>品牌资产：</strong>通过IP持续运营，沉淀品牌认知资产，形成「中医学习=灵枢微观」的用户心智</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-xl font-bold text-primary mb-3">三、IP变现全路径</h4>
+            <ul class="space-y-2 text-slate-700 list-disc pl-5">
+              <li>IP授权：授权给潮玩品牌、文创公司、国潮服饰品牌，收取5万-20万元/年授权费+8%-15%销售分成</li>
+              <li>IP联名：与茶饮、美妆、文具等品牌联名，推出「小枢」限定款产品，按销售额分成</li>
+              <li>内容付费：开发「小枢的奇妙中医之旅」付费动画课程（共20集，定价99元），全知识付费平台上线</li>
+              <li>周边众筹：在摩点等众筹平台发起「小枢」盲盒、手办众筹，测试市场热度并提前锁定用户</li>
+              <li>线下活动：IP主题展览、市集、科普活动，实现线下流量变现与品牌曝光</li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-8 text-right">
+          <button id="closeModalBtn" class="bg-primary text-white px-6 py-2 rounded-full font-semibold">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript 互动逻辑 -->
+  <script>
+    // AOS动画初始化
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      offset: 100
+    });
+
+    // 导航栏滚动效果
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('bg-dark/90', 'backdrop-blur-md', 'shadow-md');
+        navbar.classList.remove('bg-transparent');
+      } else {
+        navbar.classList.remove('bg-dark/90', 'backdrop-blur-md', 'shadow-md');
+        navbar.classList.add('bg-transparent');
+      }
+    });
+
+    // 移动端菜单
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
+
+    menuBtn.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      if (menuOpen) {
+        mobileMenu.style.height = 'auto';
+        menuBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+      } else {
+        mobileMenu.style.height = '0';
+        menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+      }
+    });
+
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          
+          // 关闭移动端菜单
+          if (menuOpen) {
+            menuOpen = false;
+            mobileMenu.style.height = '0';
+            menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+          }
+        }
+      });
+    });
+
+    // 数字计数动画
+    const countNums = document.querySelectorAll('.count-num');
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const element = entry.target;
+          const target = parseFloat(element.getAttribute('data-target'));
+          const duration = 2000;
+          const step = target / (duration / 16);
+          let current = 0;
+
+          const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+              element.textContent = target;
+              clearInterval(timer);
+            } else {
+              element.textContent = current.toFixed(target % 1 === 0 ? 0 : 1);
+            }
+          }, 16);
+          
+          countObserver.unobserve(element);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    countNums.forEach(num => {
+      countObserver.observe(num);
+    });
+
+    // IP模态框控制
+    const ipModal = document.getElementById('ipModal');
+    const ipDetailBtn = document.getElementById('ipDetailBtn');
+    const closeModal = document.getElementById('closeModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    function openModal() {
+      ipModal.classList.remove('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModalFunc() {
+      ipModal.classList.add('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = 'auto';
+    }
+
+    ipDetailBtn.addEventListener('click', openModal);
+    closeModal.addEventListener('click', closeModalFunc);
+    closeModalBtn.addEventListener('click', closeModalFunc);
+    ipModal.addEventListener('click', (e) => {
+      if (e.target === ipModal) closeModalFunc();
+    });
+
+    // 下载按钮提示
+    const downloadBtn = document.getElementById('downloadBtn');
+    downloadBtn.addEventListener('click', (e) => {
+      // 若APK文件未上传，提示用户
+      if (downloadBtn.getAttribute('href') === './灵枢微观.apk' && !window.location.host.includes('github.io')) {
+        e.preventDefault();
+        alert('请将APK文件命名为「灵枢微观.apk」上传至GitHub仓库根目录，部署后即可正常下载！');
+      }
+    });
+  </script>
+</body>
+</html>
